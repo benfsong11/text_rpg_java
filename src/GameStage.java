@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class GameStage {
     private Player player;
     private HuntingField huntingField;
+    private Store store;
+    private Inventory inventory;
 
     public GameStage() {
         player = new Player();
@@ -31,8 +33,24 @@ public class GameStage {
                     huntingField.update();
                     break;
                 case 2:
+                    if (store == null) {
+                        store = new Store();
+                        store.setPlayer(player);
+                        if (inventory == null) {
+                            inventory = new Inventory();
+                            store.setInventory(inventory);
+                        }
+                    }
+                    store.update();
                     break;
                 case 3:
+                    if (inventory == null) {
+                        inventory = new Inventory();
+                        inventory.setPlayer(player);
+                    } else {
+                        inventory.setPlayer(player);
+                    }
+                    inventory.update();
                     break;
                 case 4:
                     return;

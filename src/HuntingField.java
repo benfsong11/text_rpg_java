@@ -27,12 +27,19 @@ public class HuntingField {
 
                     if (player.getHp() <= 0) {
                         System.out.println("당신은 사망하셨습니다.");
+                        player.reduceExp();
+                        player.reduceMoney();
                         player.setHp(player.getMaxHp());
                         return;
                     }
 
                     if (monster.getHp() <= 0) {
                         System.out.println("사냥에 성공했습니다!");
+                        player.plusExp(monster.getExp());
+                        if (player.getExp() >= player.getMaxExp()) {
+                            player.levelUp();
+                            player.setHp(player.getMaxHp());
+                        }
                         return;
                     }
                     break;
